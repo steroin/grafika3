@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+      <ColumnConstraints halignment="RIGHT" minWidth="10.0" prefWidth="180.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="747.0" GridPane.columnSpan="2">
+        <menus>
+          <Menu mnemonicParsing="false" text="Plik">
+            <items>
+              <MenuItem fx:id="open" mnemonicParsing="false" onAction="#openVectorGraphic" text="Otwórz obraz wektorowy">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem fx:id="open_raster" mnemonicParsing="false" onAction="#openRasterGraphic" text="Otwórz obraz rastrowy" />
+                  <MenuItem mnemonicParsing="false" text="Zapisz">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Zamknij">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane prefHeight="534.0" prefWidth="559.0" stylesheets="@res/tabbedpane.css" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+          <tabs>
+          <Tab onSelectionChanged="#changeModeToVector" text="Obraz wektorowy">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <Pane fx:id="vector_canvas" prefHeight="544.0" prefWidth="616.0" />
+                     </content></ScrollPane>
+               </content>
+          </Tab>
+          <Tab onSelectionChanged="#changeModeToRaster" text="Obraz rastrowy">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <Pane fx:id="raster_canvas" prefHeight="543.0" prefWidth="615.0" />
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+         <center>
+            <ToolBar orientation="VERTICAL" prefWidth="180.0" BorderPane.alignment="CENTER">
+              <items>
+                  <VBox alignment="CENTER" prefWidth="160.0" spacing="12.0">
+                     <children>
+                      <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openScaleBox" prefHeight="60.0" prefWidth="80.0" text="Skaluj">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@res/square.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openRotateBox" prefHeight="60.0" prefWidth="80.0" text="Obróć">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@res/arrows.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openTranslateBox" prefHeight="60.0" prefWidth="80.0" text="Przesuń">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@res/move-arrows.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Label text="Złożona transformacja:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="complex_transform" prefHeight="52.0" prefWidth="119.0" />
+                        <Button fx:id="complex_transform_ok" mnemonicParsing="false" onAction="#complexTransform" text="OK" />
+                        <Button fx:id="reflect" mnemonicParsing="false" onAction="#doMirrorImage" text="Odbicie" />
+                        <ComboBox fx:id="combobox" prefWidth="150.0" promptText="Algorytm interpolacji" />
+                     </children>
+                  </VBox>
+              </items>
+            </ToolBar>
+         </center>
+         <bottom>
+            <Label fx:id="coords" text="[x,y]" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </bottom>
+      </BorderPane>
+   </children>
+</GridPane>
