@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Grafika3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Grafika3_jar</output-path>
+    <root id="archive" name="Grafika3.jar">
+      <element id="module-output" name="Grafika3" />
+    </root>
+  </artifact>
+</component>
